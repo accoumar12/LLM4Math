@@ -3,13 +3,13 @@ import gradio as gr
 import argparse
 import logging
 
-from utils.utils import load_model, predict, test_a_file, save_option, multiply_two_numbers, create_contextualized_prompt
+from utils.utils import load_model, predict, test_a_file, save_option, multiply_two_numbers_question, create_contextualized_prompt
 from utils.constants import MODEL_NAMES, DEFAULT_MODEL, PRECISIONS, DEFAULT_PRECISION
 
 
 # ---------------------------------------------------------------------------
 # logger
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -65,13 +65,25 @@ def gradio_app():
                 b2 = gr.Button("Save options")
                 b2.click(save_option, [max_length, prefix_text, end_text])
             with gr.Tab("Multiplication"):
-                first_number = gr.Number(label="First number")
-                second_number = gr.Number(label="Second number")
-                product = multiply_two_numbers(first_number, second_number)
+                max_length = gr.Slider(
+                    minimum = 0,
+                    maximum=2048,
+                    value=500,
+                    step=1,
+                    label="How many token can the model generate max (not working yet)"
+                )
+                first_number = gr.Number(value=1, label="First number")
+                second_number = gr.Number(value=1, label="Second number")
+                logger.debug(vars(first_number))
                 
+                end_text = gr.Text(
+                    placeholder="</s>",
+                    label="what should be consider the end of the bot generation (can cause the AI to stop generating sonner)"
+                )
                 context = gr.Textbox(label="Context")
                 b3 = gr.Button("Save Multiply Options")
-                b3.click(save_option, [500, ])
+                b3.click(save_option, [max_length, create_contextualized_prompt(context, multiply_two_numbers_question(first_number.value, second_number.value)), end_text])
+
         # Create a Gradio Chatbot Interface
         with gr.Tab("Teacher Assistant"):
             gr.ChatInterface(
