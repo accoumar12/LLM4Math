@@ -72,6 +72,10 @@ def gradio_app():
                     step=1,
                     label="How many token can the model generate max (not working yet)"
                 )
+                context = gr.Text(
+                    label="The context of the exercise",
+                    placeholder="Space"
+                )
                 end_text = gr.Text(
                     placeholder="</s>",
                     label="what should be consider the end of the bot generation (can cause the AI to stop generating sonner)"
@@ -82,7 +86,7 @@ def gradio_app():
                     add_btn = gr.Button("Add")
                 c = gr.Number(label="sum")
                 add_btn.click(add_two_numbers, inputs=[a, b], outputs=c)
-                
+
         # Create a Gradio Chatbot Interface
         with gr.Tab("Teacher Assistant"):
             gr.ChatInterface(
