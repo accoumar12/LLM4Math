@@ -400,3 +400,9 @@ def test_a_file(
     answers_file_name = f"answers_{cache_model_name}_{os.path.basename(file_name)}"
     prompts_df.to_csv(ANSWERS_FOLDER + "/" + answers_file_name, index=False)
     return ANSWERS_FOLDER + "/" + answers_file_name
+
+def multiply_two_numbers(a: int, b: int):
+    return(f"The result of the multiplication {a} * {b} is {a*b}")
+
+def create_contextualized_prompt(context: str, question: str):
+    return(f"###CONTEXT###\n{context}\n###QUESTION###\n{question}\n###END###")

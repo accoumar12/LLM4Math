@@ -3,7 +3,7 @@ import gradio as gr
 import argparse
 import logging
 
-from utils.utils import load_model, predict, test_a_file, save_option
+from utils.utils import load_model, predict, test_a_file, save_option, multiply_two_numbers, create_contextualized_prompt
 from utils.constants import MODEL_NAMES, DEFAULT_MODEL, PRECISIONS, DEFAULT_PRECISION
 
 
@@ -64,6 +64,14 @@ def gradio_app():
                 )
                 b2 = gr.Button("Save options")
                 b2.click(save_option, [max_length, prefix_text, end_text])
+            with gr.Tab("Multiplication"):
+                first_number = gr.Number(label="First number")
+                second_number = gr.Number(label="Second number")
+                product = multiply_two_numbers(first_number, second_number)
+                
+                context = gr.Textbox(label="Context")
+                b3 = gr.Button("Save Multiply Options")
+                b3.click(save_option, [500, ])
         # Create a Gradio Chatbot Interface
         with gr.Tab("Teacher Assistant"):
             gr.ChatInterface(
