@@ -401,9 +401,8 @@ def test_a_file(
     prompts_df.to_csv(ANSWERS_FOLDER + "/" + answers_file_name, index=False)
     return ANSWERS_FOLDER + "/" + answers_file_name
 
-def multiply_two_numbers_question(a, b):
-    result = a * b
-    return f"The result of multiplying {a} and {b} is {result}."
+def add_two_numbers(first_number: int, second_number: int):
+    return first_number + second_number
 
 def create_contextualized_prompt(context: str, question: str):
     return(f"###CONTEXT###\n{context}\n###QUESTION###\n{question}\n###END###")
