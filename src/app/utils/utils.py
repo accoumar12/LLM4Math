@@ -540,7 +540,6 @@ def predict_image(prompt, seed=1231231):
         return Path(tmpfile.name)
 
 
-def set_generation_theme(chosen_theme: str | None):
+def set_generation_theme(value: str | None = THEME):
     global THEME
-    THEME = chosen_theme
-    return
+    THEME = value

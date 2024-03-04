@@ -113,12 +113,12 @@ def gradio_app():
                 b2.click(save_option, [max_length, prefix_text, end_text])
         # Create a Gradio Chatbot Interface
         with gr.Tab("Teacher Assistant"):
-            gr.Interface(
-                fn=set_generation_theme,
-                inputs="textbox",
-                value=THEME,
+            gr.Textbox(
+                # value=set_generation_theme,
+                placeholder=THEME,
                 label="Choose your theme",
             )
+
             gr.ChatInterface(
                 predict,
                 additional_inputs=[model_name_chosen],
