@@ -9,10 +9,18 @@ from utils.constants import (
     OLLAMA_MODEL,
     PRECISIONS,
     RAG_DATABASE,
+    THEME,
     OLLAMA_default,
     available_models_paths,
 )
-from utils.utils import load_model, predict, predict_image, save_option, test_a_file
+from utils.utils import (
+    load_model,
+    predict,
+    predict_image,
+    save_option,
+    set_generation_theme,
+    test_a_file,
+)
 
 # ---------------------------------------------------------------------------
 # logger
@@ -105,6 +113,12 @@ def gradio_app():
                 b2.click(save_option, [max_length, prefix_text, end_text])
         # Create a Gradio Chatbot Interface
         with gr.Tab("Teacher Assistant"):
+            gr.Interface(
+                fn=set_generation_theme,
+                inputs="textbox",
+                value=THEME,
+                label="Choose your theme",
+            )
             gr.ChatInterface(
                 predict,
                 additional_inputs=[model_name_chosen],

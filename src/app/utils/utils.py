@@ -57,6 +57,7 @@ from utils.constants import (
     RAG_FOLDER_PATH,
     REPO,
     TAESD_MODEL,
+    THEME,
 )
 from utils.RAG_utils import build_prompt, process_llm_response
 
@@ -537,3 +538,9 @@ def predict_image(prompt, seed=1231231):
     with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as tmpfile:
         image.save(tmpfile, "JPEG", quality=80, optimize=True, progressive=True)
         return Path(tmpfile.name)
+
+
+def set_generation_theme(chosen_theme: str | None):
+    global THEME
+    THEME = chosen_theme
+    return

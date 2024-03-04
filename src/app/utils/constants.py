@@ -104,3 +104,5 @@ REPO = "ByteDance/SDXL-Lightning"
 # 1-step
 CHECKPOINT = "sdxl_lightning_2step_unet.safetensors"
 TAESD_MODEL = "madebyollin/taesdxl"
+
+THEME = "dinosaurs"
